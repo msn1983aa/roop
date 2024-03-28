@@ -1,59 +1,81 @@
-Take a video and replace the face in it with a face of your choice. You only need one image of the desired face. No dataset, no training.
+## This project has been discontinued
 
-That's it, that's the software. You can watch some demos [here](https://drive.google.com/drive/folders/1KHv8n_rd3Lcr2v7jBq1yPSTWM554Gq8e?usp=sharing).
+Yes, it still works, you can still use this software. It just won't recieve any updates now.
 
-![demo-gif](demo.gif)
+> I do not have the interest or time to oversee the development of this software. I thank all the amazing people who contributed to this project and made what it is in it's final form.
 
-## How do I install it?
-> Note: The instructions may or may not work for you. Use google or look through issues people have created here to solve your problems.
+# Roop
 
-There are two types of installations: basic and gpu-powered.
+> Take a video and replace the face in it with a face of your choice. You only need one image of the desired face. No dataset, no training.
 
-- **Basic:** It is more likely to work on your computer but it will also be very slow. You can follow instructions for the basic install [here](https://github.com/s0md3v/roop/wiki/1.-Installation).
+[![Build Status](https://img.shields.io/github/actions/workflow/status/s0md3v/roop/ci.yml.svg?branch=main)](https://github.com/s0md3v/roop/actions?query=workflow:ci)
 
-- **GPU:** If you have a good GPU and are ready for solving any software issues you may face, you can enable GPU which is wayyy faster. To do this, first follow the basic install instructions given above and then follow GPU-specific instructions [here](https://github.com/s0md3v/roop/wiki/2.-GPU-Acceleration).
+<img src="https://i.ibb.co/4RdPYwQ/Untitled.jpg"/>
 
-## How do I use it?
-> Note: When you run this program for the first time, it will download some models ~300MB in size.
+## Installation
 
-Executing `python run.py` command will launch this window:
-![gui-demo](gui-demo.png)
+Be aware, the installation needs technical skills and is not for beginners. Please do not open platform and installation related issues on GitHub.
 
-Choose a face (image with desired face) and the target image/video (image/video in which you want to replace the face) and click on `Start`. Open file explorer and navigate to the directory you select your output to be in. You will find a directory named `<video_title>` where you can see the frames being swapped in realtime. Once the processing is done, it will create the output file. That's it.
+[Basic](https://github.com/s0md3v/roop/wiki/1.-Installation) - It is more likely to work on your computer, but will be quite slow
 
-Don't touch the FPS checkbox unless you know what you are doing.
+[Acceleration](https://github.com/s0md3v/roop/wiki/2.-Acceleration) - Unleash the full potential of your CPU and GPU
 
-Additional command line arguments are given below:
+
+## Usage
+
+Start the program with arguments:
 
 ```
-options:
-  -h, --help            show this help message and exit
-  -f SOURCE_IMG, --face SOURCE_IMG
-                        use this face
-  -t TARGET_PATH, --target TARGET_PATH
-                        replace this face
-  -o OUTPUT_FILE, --output OUTPUT_FILE
-                        save output to this file
-  --gpu                 use gpu
-  --keep-fps            maintain original fps
-  --keep-frames         keep frames directory
-  --max-memory MAX_MEMORY
-                        set max memory
-  --max-cores CORES_COUNT
-                        set max cpu cores
+python run.py [options]
+
+-h, --help                                                                 show this help message and exit
+-s SOURCE_PATH, --source SOURCE_PATH                                       select an source image
+-t TARGET_PATH, --target TARGET_PATH                                       select an target image or video
+-o OUTPUT_PATH, --output OUTPUT_PATH                                       select output file or directory
+--frame-processor FRAME_PROCESSOR [FRAME_PROCESSOR ...]                    frame processors (choices: face_swapper, face_enhancer, ...)
+--keep-fps                                                                 keep target fps
+--keep-frames                                                              keep temporary frames
+--skip-audio                                                               skip target audio
+--many-faces                                                               process every face
+--reference-face-position REFERENCE_FACE_POSITION                          position of the reference face
+--reference-frame-number REFERENCE_FRAME_NUMBER                            number of the reference frame
+--similar-face-distance SIMILAR_FACE_DISTANCE                              face distance used for recognition
+--temp-frame-format {jpg,png}                                              image format used for frame extraction
+--temp-frame-quality [0-100]                                               image quality used for frame extraction
+--output-video-encoder {libx264,libx265,libvpx-vp9,h264_nvenc,hevc_nvenc}  encoder used for the output video
+--output-video-quality [0-100]                                             quality used for the output video
+--max-memory MAX_MEMORY                                                    maximum amount of RAM in GB
+--execution-provider {cpu} [{cpu} ...]                                     available execution provider (choices: cpu, ...)
+--execution-threads EXECUTION_THREADS                                      number of execution threads
+-v, --version                                                              show program's version number and exit
 ```
 
-Looking for a CLI mode? Using the -f/--face argument will make the program in cli mode.
 
-## Future plans
-- [ ] Improve the quality of faces in results
-- [ ] Replace a selective face throughout the video
-- [ ] Support for replacing multiple faces
+### Headless
+
+Using the `-s/--source`, `-t/--target` and `-o/--output` argument will run the program in headless mode.
+
 
 ## Disclaimer
-Deepfake software already exist. This is just an experiment to make the existing techniques better. Users are expected to use this to learn about AI and not use it for illicit or unethical purposes. Users must get consent from the concerned people before using their face and must not hide the fact that it is a deepfake when posting content online. I am not responsible for any malicious activity done through this software, this is a purely educational project aimed at exploring AI.
+
+This software is designed to contribute positively to the AI-generated media industry, assisting artists with tasks like character animation and models for clothing.
+
+We are aware of the potential ethical issues and have implemented measures to prevent the software from being used for inappropriate content, such as nudity.
+
+Users are expected to follow local laws and use the software responsibly. If using real faces, get consent and clearly label deepfakes when sharing. The developers aren't liable for user actions.
+
+
+## Licenses
+
+Our software uses a lot of third party libraries as well pre-trained models. The users should keep in mind that these third party components have their own license and terms, therefore our license is not being applied.
+
 
 ## Credits
-- [ffmpeg](https://ffmpeg.org/): for making video related operations easy
-- [deepinsight](https://github.com/deepinsight): for their [insightface](https://github.com/deepinsight/insightface) project which provided a well-made library and models.
-- and all developers behind libraries used in this project.
+
+- [deepinsight](https://github.com/deepinsight) for their [insightface](https://github.com/deepinsight/insightface) project which provided a well-made library and models.
+- all developers behind the libraries used in this project
+
+
+## Documentation
+
+Read the [documentation](https://github.com/s0md3v/roop/wiki) for a deep dive.
